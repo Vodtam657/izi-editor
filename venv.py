@@ -1,9 +1,9 @@
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
-import os
-from PIL.ImageFilter import *
+
+
 from PyQt6.QtGui import QPixmap, QImage
-from PIL import Image
+from PIL import Image, ImageEnhance
 
 
 def pil2pixmap(im):
@@ -30,6 +30,9 @@ window.resize(800, 600)
 window.setWindowTitle("ІЗІ ФОТОШОП")
 
 folderBtn = QPushButton("Папка")
+zbljas = QPushButton("З/Б яксравості")
+zblkon = QPushButton("З/Б контрасності")
+zblnac = QPushButton("З/Б насиченості")
 leftBtn = QPushButton("Ліворуч")
 rightBtn = QPushButton("праворуч")
 mirrorBtn = QPushButton("дзеркало")
@@ -46,6 +49,10 @@ mainLine.addLayout(columnLeft)
 columnRight = QVBoxLayout()
 columnRight.addWidget(imgLbl)
 line1 = QHBoxLayout()
+blurBtn.addWidget(blurBtn)
+zbljas.add.Widget(zbjas)
+zblkon.addWidget(zblkon)
+zblnzc.addWidget(zblnac)
 line1.addWidget(leftBtn)
 line1.addWidget(rightBtn)
 line1.addWidget(blurBtn)
@@ -67,6 +74,34 @@ def load(self):
     def show_image(self):
         pixel = pil2pixmap(self.image)
         imgLbl.setPixmap(pixel)
+
+    def rozmitya(self):
+        self.image = self.image.filter(ImageFilter.BLUR)
+        self.show_image()
+
+    def povliv(self):
+        self.image = self.image.trenspose(Image.ROTATE_90)
+        self.show_image()
+
+    def vidzir(self):
+        self.image = self.image.trenspose(Image.FLIP_LEFT_RIGHT)
+        self.show_image()
+
+    def bla(self):
+        self.image = self.image.convert("L")
+        self.show_image()
+
+    def jas(self):
+        self.image = ImageEnhance.Brightness(self.image).enhance(1.5)
+        self.show_image()
+
+    def kon(self):
+        self.image = ImageEnhamce.Contrast(self.image).enhance(1.5)
+        self.show_image()
+
+
+
+
 
 
 work_with_photo = WorkWithPhoto()
